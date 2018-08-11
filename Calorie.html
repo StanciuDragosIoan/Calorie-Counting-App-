@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!--Materialize Icons CDN-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+	<style>
+		.btn {
+			width: 150px;
+		}
+
+		/*spinner*/
+
+		.spinner {
+			content: "";
+			box-sizing: border-box;
+			position: relative;
+			top: 50%;
+			left: 50%;
+			height: 200px;
+			width: 200px;
+			margin-top: -10px;
+			margin-left: -100px;
+			border-radius: 50%;
+			border: 100px solid white;
+			border-top-color: black;
+			animation: spinner 0.7s linear infinite;
+		}
+
+		@keyframes spinner {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+		 
+		@media only screen and (max-width: 320px) {
+			 
+			#addMealBtn{
+				width: 100px;
+			}
+			
+			#clear{
+				width: 100px;
+			}
+			
+			#delete{
+				margin-left: 20px;
+				width: 100px;
+			}
+			
+			#update{
+				margin-left: 64px;
+				width: 100px;
+			}
+			
+			#back{
+				margin-left: 64px;
+				width: 100px;
+			}
+			
+			#calculate_meal{
+				margin-left: 40px;
+				width: 130px;
+				 
+			}
+			
+			
+			
+		} 
+		
+		@media only screen and (max-width: 420px) {
+			 
+			#addMealBtn{
+				width: 100px;
+			}
+			
+			#clear{
+				width: 100px;
+			}
+			
+			#delete{
+				margin-left: 20px;
+				width: 100px;
+			}
+			
+			#update{
+				margin-left: 64px;
+				width: 100px;
+			}
+			
+			#back{
+				margin-left: 64px;
+				width: 100px;
+			}
+			
+			#calculate_meal{
+				margin-left: 60px;
+				width: 140px;
+				 
+			}
+			
+			
+			
+		} 
+	</style>
+	<title>Calorie Counting App</title>
+</head>
+
+<body>
+
+	<nav>
+		<div class="nav-wrapper #ffb300 amber darken-1">
+			<div class="container">
+				<a href="#" class="brand-logo center">Calorie App</a>
+			</div>
+		</div>
+	</nav>
+	<br>
+
+
+
+
+	<div class="container">
+		<!--Welcome page-->
+		<div class="card" id="logInApp">
+			<div class="row valign-wrapper">
+				<div class="col s12">
+					<h3 class="center">Welcome to the Calorie App</h3>
+					<h4 class="center">Press the pizza slice to log your meals !
+						<i class="material-icons">insert_emoticon</i>
+					</h4>
+					<div class="center">
+						<i class="material-icons large waves-effect waves-red" id="pizza" title="Click me for pizza! =)">local_pizza</i>
+					</div>
+					<i class="medium material-icons right" title="Don't click me >:O">local_dining</i>
+					<i class="medium material-icons centre" title="Don't click me >:O">local_cafe</i>
+					<i class=" medium material-icons right" title="Don't click me >:O">local_bar</i>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--Form Card for adding meals-->
+		<div class="card" id="addMeal">
+			<div class="card-content">
+				<span class="card-title center">Add a Meal</span>
+				<form class="col">
+					<div class="row  valign-wrapper">
+						<div class="input-field col s5">
+							<input type="text" placeholder="Add Item" id="item-meal">
+							<label for="item-name">Meal</label>
+						</div>
+						<div class="input-field col s5 left">
+							<input type="number" placeholder="Add Calories" id="item-calories">
+							<label for="item-calories">Calories</label>
+						</div>
+					</div>
+				</form>
+				<button type="button" class="btn #e65100 orange darken-4 waves-effect waves-yellow" id="addMealBtn">
+					<i class="material-icons">add_circle</i> Add Meal
+				</button>
+				<button type="button" class="btn #e65100 orange darken-4 waves-effect waves-yellow right" id="clear">
+					<i class="material-icons">clear</i> Clear Meals
+				</button>
+				<br>
+				<br>
+				<br>
+				<button class="btn-floating #e65100 orange darken-4 waves-effect waves-yellow" id="calc">
+					<i class="material-icons -text" title="Click to Calculate Cals">arrow_drop_down_circle</i>
+				</button>
+				<button type="button" class="btn #d32f2f red darken-2 waves-effect waves-yellow" id="delete">
+					<i></i> Delete Meal</button>
+				<button type="button" class="btn #64dd17 light-green accent-4 waves-effect waves-yellow" id="update">
+					<i></i> Update Meal</button>
+				<button type="button" class="btn #ffea00 yellow accent-3 waves-effect waves-red" id="back">
+					<i></i> Back</button>
+				<br>
+				<br>
+				<!--Calories List-->
+				<ul class="collection card" id="calorieList">
+					<!--	<li class="collection-item" id="item-0">
+						<strong>Steak Dinner: </strong>
+						<em>1200 Calories</em>
+						<a href="#" class="secondary-content">
+							<i class="material-icons waves-effect waves-blue">edit</i>
+						</a>
+					</li>
+
+					<li class="collection-item" id="item-0">
+						<strong>Cake: </strong>
+						<em>600 Calories</em>
+						<a href="#" class="secondary-content">
+							<i class="material-icons waves-effect waves-blue">edit</i>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+
+			<!--Calorie Count-->
+			<h2 class="center-align card">Total Calories:
+				<span class="total-calories waves-effect waves-red">0</span>
+			</h2>
+		</div>
+
+
+		<!--Calculate Meal/Weight-->
+		<div class="card" id="calculateCalMeal">
+			<div class="card-content">
+				<button class="btn-floating right #e65100 orange darken-4 waves-effect waves-yellow" id="remove_calc">
+					<i class="material-icons -text" title="Click to hide calorie calculator">remove_circle</i>
+				</button>
+				<span class="card-title center">Calculate Meal</span>
+				<form class="col">
+					<div class="row  valign-wrapper">
+						<div class="input-field col s5">
+							<input type="text" id="Quantity" placeholder="Quantity">
+							<label for="item-name">Quantity in grams</label>
+						</div>
+						<div class="input-field col s5 left">
+							<input type="number" id="calories100" placeholder="Calories/100g">
+							<label for="item-calories">Calories</label>
+						</div>
+					</div>
+				</form>
+				<h5 class="center-align">Calories/ 1 Meal:
+					<span id="totalMeal" class="orange waves-effect waves-yellow"></span>
+				</h5>
+				<button type="button" id="calculate_meal" class="btn #e65100 orange darken-4 waves-effect waves-yellow" title="Click to calculate meal">
+					<i class="material-icons">add</i>Calculate</button>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<div class="spinner">
+	</div>
+
+	<footer class="page-footer ffb300 amber darken-1 valign-wrapper card">
+		<div class="container center">
+			<h5>© 2018 Calorie App</h5>
+		</div>
+	</footer>
+	<br>
+
+
+
+	<script src="calorie.js"></script>
+</body>
